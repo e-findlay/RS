@@ -297,7 +297,7 @@ class UI():
             business_names.append(businesses['name'][i])
         business_ratings = []
         # predict ratings for user using recommender 2
-        model_params = torch.load('./data/model.pt')
+        model_params = torch.load('./model.pt')
         model = EAutoRec(4055, 4055)
         # load autoencoder parameters
         model.load_state_dict(model_params['model'])
