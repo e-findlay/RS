@@ -10,7 +10,7 @@ import torch
 import torch.nn as nn
 from nltk.stem.snowball import SnowballStemmer
 
-data = np.load('C:/Users/fox2e/RS/data/cf_data.npy', allow_pickle=True)
+data = np.load('./data/cf_data.npy', allow_pickle=True)
 data = data.tolist()
 data = np.random.permutation(data).tolist()
 total = len(data)
@@ -61,14 +61,14 @@ def train(n_epochs=100):
             optimiser.step()
             
         params = {'model': model.state_dict()}
-        torch.save(params, 'C:/Users/fox2e/RS/data/model.pt')
+        torch.save(params, './model.pt')
         print(time.time() - start)
         print(loss)
     params = {'model': model.state_dict()}
-    torch.save(params, 'C:/Users/fox2e/RS/data/model.pt')
+    torch.save(params, './model.pt')
 def test():
     model = EAutoRec(4055, 4055)
-    params = torch.load('C:/Users/fox2e/RS/data/model.pt')
+    params = torch.load('./model.pt')
     model.load_state_dict(params['model'])
     criterion = RMSE_Loss
     LOSS = 0
@@ -85,7 +85,7 @@ def calculate_coverage(data):
     pc = 0
     items = [0] * 4055
     model = EAutoRec(4055, 4055)
-    params = torch.load('C:/Users/fox2e/RS/data/model.pt')
+    params = torch.load('./model.pt')
     model.load_state_dict(params['model'])
     for d in data:
         n_recommended = 0
@@ -110,7 +110,7 @@ def calculate_coverage(data):
 
 def MEP(data):
     model = EAutoRec(4055, 4055)
-    params = torch.load('C:/Users/fox2e/RS/data/model.pt')
+    params = torch.load('./model.pt')
     model.load_state_dict(params['model'])
     total = 0
     for d in data:
